@@ -5,6 +5,8 @@ import { Inter } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
+import NextAuthProvider from "./_components/NextAuthProvider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,7 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn("dark", inter.className)}>{children}</body>
+      <NextAuthProvider>
+        <body className={cn("dark", inter.className)}>{children}</body>
+      </NextAuthProvider>
     </html>
   );
 }

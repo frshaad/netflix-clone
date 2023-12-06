@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { FaGithub, FaGoogle } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
@@ -13,9 +14,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
+import AuthButton from "../_components/AuthButton";
+
 export default function LoginPage() {
   return (
-    <form action="">
+    <form>
       <Card className="mt-24 min-w-[360px] bg-black/80 md:mt-0">
         <CardHeader>
           <CardTitle>Login</CardTitle>
@@ -31,12 +34,22 @@ export default function LoginPage() {
           <Separator />
 
           <div className="flex items-center justify-center gap-x-3">
-            <Button size="icon" variant="outline">
+            <AuthButton provider="github" />
+            <AuthButton provider="google" />
+            {/* <Button
+              onClick={() => signIn("github")}
+              size="icon"
+              variant="outline"
+            >
               <FaGithub size={20} />
             </Button>
-            <Button size="icon" variant="outline">
+            <Button
+              onClick={() => signIn("google")}
+              size="icon"
+              variant="outline"
+            >
               <FaGoogle size={20} />
-            </Button>
+            </Button> */}
           </div>
         </CardContent>
 

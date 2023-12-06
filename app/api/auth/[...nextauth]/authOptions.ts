@@ -4,7 +4,7 @@ import EmailProvider from "next-auth/providers/email";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
-import prisma from "./db";
+import prisma from "@/lib/db";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -29,4 +29,5 @@ export const authOptions: AuthOptions = {
       from: process.env.EMAIL_FROM,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
 };

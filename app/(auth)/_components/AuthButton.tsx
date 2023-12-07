@@ -13,7 +13,7 @@ type Props = {
 export default function AuthButton({ provider }: Props) {
   return (
     <Button
-      onClick={async () => await signIn("github")}
+      onClick={async () => await signIn(provider)}
       size="icon"
       variant="outline"
     >

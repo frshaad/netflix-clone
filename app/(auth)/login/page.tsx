@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { signIn } from "next-auth/react";
-import { FaGithub, FaGoogle } from "react-icons/fa6";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,12 +13,19 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { authOptions } from "@/lib/authOptions";
 
 import AuthButton from "../_components/AuthButton";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    return redirect("/");
+  }
+
   return (
-    <form>
+    <>
       <Card className="mt-24 min-w-[360px] bg-black/80 md:mt-0">
         <CardHeader>
           <CardTitle>Login</CardTitle>
@@ -26,30 +33,22 @@ export default function LoginPage() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <Input type="email" name="email" placeholder="Email" className="" />
-          <Button type="submit" variant="destructive" className="bg-[#e50914]">
-            Log In
-          </Button>
+          <form className="space-y-4">
+            <Input type="email" name="email" placeholder="Email" className="" />
+            <Button
+              type="submit"
+              variant="destructive"
+              className="w-full bg-[#e50914]"
+            >
+              Log In
+            </Button>
+          </form>
 
           <Separator />
 
           <div className="flex items-center justify-center gap-x-3">
             <AuthButton provider="github" />
             <AuthButton provider="google" />
-            {/* <Button
-              onClick={() => signIn("github")}
-              size="icon"
-              variant="outline"
-            >
-              <FaGithub size={20} />
-            </Button>
-            <Button
-              onClick={() => signIn("google")}
-              size="icon"
-              variant="outline"
-            >
-              <FaGoogle size={20} />
-            </Button> */}
           </div>
         </CardContent>
 
@@ -62,6 +61,6 @@ export default function LoginPage() {
           </div>
         </CardFooter>
       </Card>
-    </form>
+    </>
   );
 }

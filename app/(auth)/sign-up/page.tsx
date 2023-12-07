@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { FaGithub, FaGoogle } from "react-icons/fa6";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,31 +13,42 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { authOptions } from "@/lib/authOptions";
 
-export default function SignUpPage() {
+import AuthButton from "../_components/AuthButton";
+
+export default async function SignUpPage() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    return redirect("/home");
+  }
+
   return (
-    <form action="">
+    <>
       <Card className="mt-24 min-w-[360px] bg-black/80 md:mt-0">
         <CardHeader>
           <CardTitle>Sign Up</CardTitle>
-          <CardDescription>Create an account</CardDescription>
+          <CardDescription>Create a new account</CardDescription>
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <Input type="email" name="email" placeholder="Email" className="" />
-          <Button type="submit" variant="destructive" className="bg-[#e50914]">
-            Sign Up
-          </Button>
+          <form className="space-y-4">
+            <Input type="email" name="email" placeholder="Email" className="" />
+            <Button
+              type="submit"
+              variant="destructive"
+              className="w-full bg-[#e50914]"
+            >
+              Sign Up
+            </Button>
+          </form>
 
           <Separator />
 
           <div className="flex items-center justify-center gap-x-3">
-            <Button size="icon" variant="outline">
-              <FaGithub size={20} />
-            </Button>
-            <Button size="icon" variant="outline">
-              <FaGoogle size={20} />
-            </Button>
+            <AuthButton provider="github" />
+            <AuthButton provider="google" />
           </div>
         </CardContent>
 
@@ -44,11 +56,11 @@ export default function SignUpPage() {
           <div className="flex items-center gap-1 text-sm text-gray-500">
             <p>Already have an account?</p>
             <Link href="/login" className="text-white hover:underline">
-              Log in
+              Log In
             </Link>
           </div>
         </CardFooter>
       </Card>
-    </form>
+    </>
   );
 }

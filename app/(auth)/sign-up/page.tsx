@@ -33,7 +33,7 @@ export default async function SignUpPage() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <form className="space-y-4">
+          <form method="post" action="/api/auth/signin" className="space-y-4">
             <Input type="email" name="email" placeholder="Email" className="" />
             <Button
               type="submit"

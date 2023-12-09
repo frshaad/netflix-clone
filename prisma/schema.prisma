@@ -7,6 +7,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Movie
+model Movie {
+  id            Int         @id
+  imageString   String
+  title         String
+  age           Int
+  duration      Float
+  overview      String
+  release       Int
+  watchlists    Watchlist[]
+  videoSource   String
+  category      String
+  youtubeString String
+  createdAt     DateTime    @default(now())
+}
+
+model Watchlist {
+  id      String @id @default(uuid())
+  userId  String
+  Movie   Movie? @relation(fields: [movieId], references: [id])
+  movieId Int?
+}
+
+// Authentication
 model Account {
   id                String  @id @default(cuid())
   userId            String

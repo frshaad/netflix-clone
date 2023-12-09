@@ -3,9 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import NextAuthProvider from "@/components/NextAuthProvider";
 import { cn } from "@/lib/utils";
-
-import NextAuthProvider from "./_components/NextAuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

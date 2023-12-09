@@ -1,3 +1,11 @@
+import MovieClip from "./_components/MovieClip";
+
 export default function HomePage() {
-  return <h1>Hello Authenticated User!</h1>;
+  return (
+    <>
+      <MovieClip />
+      <h1 className="text-3xl font-bold ">Recently Added</h1>
+      {/* <RecentlyAdded /> */}
+    </>
+  );
 }

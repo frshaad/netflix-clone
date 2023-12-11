@@ -13,3 +13,5 @@ export type Movie = {
     movieId: number | null;
   }[];
 };
+
+export type MediaCategory = "recently" | "movies" | "shows";

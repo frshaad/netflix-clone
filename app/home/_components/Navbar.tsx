@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import Logo from "@/public/netflix_logo.svg";
 
+import MobileNavbar from "./MobileNavbar";
 import NavLink from "./NavLink";
 import { links } from "./Navlinks.constant";
 import UserButton from "./UserButton";
@@ -15,7 +16,7 @@ export default function Navbar() {
         <Link href="/home" className="w-32">
           <Image src={Logo} alt="Netflix logo" priority />
         </Link>
-        <ul className="ml-14 hidden gap-x-4 lg:flex">
+        <ul className="ml-14 hidden gap-x-4 md:flex">
           {links.map((link) => (
             <NavLink key={link.id} path={link.href} label={link.name} />
           ))}
@@ -23,6 +24,7 @@ export default function Navbar() {
       </nav>
 
       <div className="flex items-center gap-x-8">
+        <MobileNavbar />
         <Search className="h-5 w-5 cursor-pointer text-gray-300" />
         <Bell className="h-5 w-5 cursor-pointer text-gray-300" />
         <UserButton />

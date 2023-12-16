@@ -17,7 +17,7 @@ export default async function HomeLayout({ children }: Props) {
   return (
     <>
       <Navbar />
-      <main className="mx-auto w-full max-w-7xl sm:px-6 lg:px-8">
+      <main className="mx-auto w-11/12 max-w-7xl sm:w-full sm:px-6 lg:px-8">
         {children}
       </main>
     </>

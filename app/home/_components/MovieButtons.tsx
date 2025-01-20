@@ -34,14 +34,14 @@ export default function MovieButtons({
         onClick={() => setIsPlayerOpen(true)}
         className="text-lg font-medium"
       >
-        <PlayCircle className="mr-2 h-6 w-6" /> Play
+        <PlayCircle className="mr-2 size-6" /> Play
       </Button>
 
       <Button
         onClick={() => setIsPlayerOpen(true)}
         className="bg-white/40 text-lg font-medium text-white hover:bg-white/30"
       >
-        <InfoIcon className="mr-2 h-6 w-6" /> Learn More
+        <InfoIcon className="mr-2 size-6" /> Learn More
       </Button>
 
       <VideoPlayerModal

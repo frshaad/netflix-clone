@@ -27,7 +27,7 @@ export default function AuthButton({ provider }: Props) {
       disabled={isLoading}
     >
       {isLoading ? (
-        <Loader2 className="h-5 w-5 animate-spin" />
+        <Loader2 className="size-5 animate-spin" />
       ) : (
         <div>
           {provider === "github" ? (

@@ -34,7 +34,7 @@ export default function MovieCardOverlay({ movie }: Props) {
   return (
     <>
       <button onClick={() => setIsPlayerOpen(true)} className="-mt-14">
-        <PlayCircle className="h-20 w-20" />
+        <PlayCircle className="size-20" />
       </button>
 
       <div className="absolute right-5 top-5 z-10">
@@ -43,7 +43,7 @@ export default function MovieCardOverlay({ movie }: Props) {
             <input type="hidden" name="watchlistId" value={watchlistId} />
             <input type="hidden" name="pathname" value={pathname} />
             <Button type="submit" variant="outline" size="icon">
-              <HeartOff className="h-4 w-4 text-red-500" />
+              <HeartOff className="size-4 text-red-500" />
             </Button>
           </form>
         ) : (
@@ -51,7 +51,7 @@ export default function MovieCardOverlay({ movie }: Props) {
             <input type="hidden" name="movieId" value={id} />
             <input type="hidden" name="pathname" value={pathname} />
             <Button type="submit" variant="outline" size="icon">
-              <Heart className="h-4 w-4 text-red-500" />
+              <Heart className="size-4 text-red-500" />
             </Button>
           </form>
         )}

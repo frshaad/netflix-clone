@@ -1,7 +1,3 @@
-import { validateEnvironment } from '@/lib/env';
-
-validateEnvironment();
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {

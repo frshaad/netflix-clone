@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid';
+import { nanoid } from 'nanoid';
 
 type linkProperties = {
   id: string;
@@ -7,9 +7,9 @@ type linkProperties = {
 };
 
 export const links: linkProperties[] = [
-  { id: uuid(), name: 'Home', href: '/home' },
-  { id: uuid(), name: 'Tv Shows', href: '/home/shows' },
-  { id: uuid(), name: 'Movies', href: '/home/movies' },
-  { id: uuid(), name: 'Recently Added', href: '/home/recently' },
-  { id: uuid(), name: 'My List', href: '/home/user/list' },
+  { id: nanoid(), name: 'Home', href: '/home' },
+  { id: nanoid(), name: 'Tv Shows', href: '/home/shows' },
+  { id: nanoid(), name: 'Movies', href: '/home/movies' },
+  { id: nanoid(), name: 'Recently Added', href: '/home/recently' },
+  { id: nanoid(), name: 'My List', href: '/home/user/list' },
 ];

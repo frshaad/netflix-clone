@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 
 import { getMediaByCategory } from '@/db/queries';
-import type { MediaCategory } from '@/types';
+import type { MediaCategory } from '@/db/schema';
 
 import MovieCard from '../_components/movie-card';
 

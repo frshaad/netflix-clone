@@ -1,19 +1,32 @@
-import { findMovie } from '../../../db/s/find-movie.helper';
+import { findMovie } from '@/db/queries';
+
 import MovieButtons from './movie-buttons';
 
 export default async function MovieClip() {
-  const data = await findMovie();
+  const movieData = await findMovie('');
 
-  if (!data) {
+  if (!movieData) {
     return <h2>Loading...</h2>;
   }
+
+  const {
+    imageUrl,
+    videoUrl,
+    title,
+    overview,
+    ageRating,
+    duration,
+    id,
+    releaseYear,
+    youtubeUrl,
+  } = movieData;
 
   return (
     <section className="flex h-[55vh] w-full items-center justify-start lg:h-[60vh]">
       <video
         className="absolute left-0 top-0 -z-10 h-[60vh] w-full object-cover brightness-[60%]"
-        poster={data.imageString}
-        src={data.videoSource}
+        poster={imageUrl}
+        src={videoUrl}
         autoPlay
         loop
         muted
@@ -21,19 +34,19 @@ export default async function MovieClip() {
 
       <div className="absolute mx-auto w-11/12 lg:w-2/5">
         <h1 className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-          {data.title}
+          {title}
         </h1>
-        <p className="mt-5 line-clamp-3 text-lg text-white">{data.overview}</p>
+        <p className="mt-5 line-clamp-3 text-lg text-white">{overview}</p>
         <div className="mt-4 flex gap-x-3">
           <MovieButtons
-            age={data.age as number}
-            duration={data.duration as number}
-            id={data.id as number}
-            key={data.id}
-            overview={data.overview as string}
-            releaseDate={data.release as number}
-            title={data.title as string}
-            youtubeUrl={data.youtubeString as string}
+            age={ageRating}
+            duration={duration}
+            id={id}
+            key={id}
+            overview={overview}
+            releaseDate={releaseYear}
+            title={title}
+            youtubeUrl={youtubeUrl}
           />
         </div>
       </div>

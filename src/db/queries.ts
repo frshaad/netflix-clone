@@ -41,7 +41,7 @@ export async function getUserWatchlist() {
 }
 
 export async function findMovie(query: string) {
-  const result = await db.query.movie.findMany({
+  const result = await db.query.movie.findFirst({
     where: eq(movie.title, query),
   });
 

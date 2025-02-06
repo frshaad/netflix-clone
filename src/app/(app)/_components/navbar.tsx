@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { UserButton } from '@clerk/nextjs';
 import { Bell, Search } from 'lucide-react';
 
 import Logo from '@/public/netflix_logo.svg';
@@ -8,7 +9,6 @@ import Logo from '@/public/netflix_logo.svg';
 import MobileNavbar from './mobile-navbar';
 import NavLink from './navbar-link';
 import { links } from './navbar-links.constant';
-import UserButton from './user-button';
 
 export default function Navbar() {
   return (

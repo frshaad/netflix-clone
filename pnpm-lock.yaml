@@ -38,8 +38,8 @@ importers:
         specifier: ~2.1.1
         version: 2.1.1
       lucide-react:
-        specifier: ~0.294.0
-        version: 0.294.0(react@19.0.0)
+        specifier: ~0.474.0
+        version: 0.474.0(react@19.0.0)
       next:
         specifier: ~15.1.6
         version: 15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -52,9 +52,6 @@ importers:
       react-dom:
         specifier: ~19.0.0
         version: 19.0.0(react@19.0.0)
-      react-icons:
-        specifier: ~4.12.0
-        version: 4.12.0(react@19.0.0)
       sharp:
         specifier: ~0.33.5
         version: 0.33.5
@@ -3009,13 +3006,13 @@ packages:
       }
     engines: { node: '>=10' }
 
-  lucide-react@0.294.0:
+  lucide-react@0.474.0:
     resolution:
       {
-        integrity: sha512-V7o0/VECSGbLHn3/1O67FUgBwWB+hmzshrgDVRJQhMh8uj5D3HBuIvhuAmQTtlupILSplwIZg5FTc4tTKMA2SA==,
+        integrity: sha512-CmghgHkh0OJNmxGKWc0qfPJCYHASPMVSyGY8fj3xgk4v84ItqDg64JNKFZn5hC6E0vHi6gxnbCgwhyVB09wQtA==,
       }
     peerDependencies:
-      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   math-intrinsics@1.1.0:
     resolution:
@@ -3669,14 +3666,6 @@ packages:
       }
     peerDependencies:
       react: ^19.0.0
-
-  react-icons@4.12.0:
-    resolution:
-      {
-        integrity: sha512-IBaDuHiShdZqmfc/TwHu6+d6k2ltNCf3AszxNmjJc1KUfXdEeRJOKyNvLmAHaarhzGmTSVygNdyu8/opXv2gaw==,
-      }
-    peerDependencies:
-      react: '*'
 
   react-is@16.13.1:
     resolution:
@@ -6384,7 +6373,7 @@ snapshots:
     dependencies:
       yallist: 4.0.0
 
-  lucide-react@0.294.0(react@19.0.0):
+  lucide-react@0.474.0(react@19.0.0):
     dependencies:
       react: 19.0.0
 
@@ -6719,10 +6708,6 @@ snapshots:
     dependencies:
       react: 19.0.0
       scheduler: 0.25.0
-
-  react-icons@4.12.0(react@19.0.0):
-    dependencies:
-      react: 19.0.0
 
   react-is@16.13.1: {}
 

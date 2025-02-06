@@ -9,12 +9,6 @@ export const environmentSchema = z.object({
   NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: z.string(),
   NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: z.string(),
   NEXT_PUBLIC_CLERK_AFTER_SIGN_OUT_URL: z.string(),
-  NEXTAUTH_URL: z.string(),
-  NEXTAUTH_SECRET: z.string(),
-  GITHUB_ID: z.string(),
-  GITHUB_SECRET: z.string(),
-  GOOGLE_CLIENT_ID: z.string(),
-  GOOGLE_CLIENT_SECRET: z.string(),
 });
 
 export type Environment = z.infer<typeof environmentSchema>;

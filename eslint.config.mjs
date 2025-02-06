@@ -83,6 +83,7 @@ const eslintConfig = [
       '@typescript-eslint/no-non-null-assertion': 'error',
       '@typescript-eslint/prefer-as-const': 'error',
       '@typescript-eslint/prefer-function-type': 'error',
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
   // React

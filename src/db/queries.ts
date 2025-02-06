@@ -34,7 +34,7 @@ export async function getUserWatchlist() {
 
   const result = await db.query.watchlist.findMany({
     where: eq(watchlist.userId, userId),
-    with: {},
+    with: { movie: true },
   });
 
   return result;

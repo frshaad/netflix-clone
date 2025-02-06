@@ -6,31 +6,35 @@ import { useState } from 'react';
 import { Heart, HeartOff, PlayCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import type { Movie } from '@/types';
+import type { movies, watchlist } from '@/db/schema';
 
 import { addToWatchlist } from './add-to-watchlist.action';
 import { removeFromWatchlist } from './remove-from-watchlist.action';
 import VideoPlayerModal from './video-player-modal';
 
-type Properties = { movie: Movie };
+type Properties = {
+  movie: typeof movies.$inferSelect & {
+    watchlistItems: (typeof watchlist.$inferSelect)[];
+  };
+};
 
 export default function MovieCardOverlay({ movie }: Properties) {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const pathname = usePathname();
 
   const {
-    age,
+    ageRating,
     duration,
     id,
     overview,
-    release,
+    releaseYear,
     title,
-    watchlists,
-    youtubeString,
+    watchlistItems,
+    youtubeUrl,
   } = movie;
 
-  const isWatchlist = watchlists.length > 0;
-  const watchlistId = watchlists[0]?.id;
+  const isWatchlist = watchlistItems.length > 0;
+  const watchlistId = watchlistItems[0]?.id;
 
   return (
     <>
@@ -65,9 +69,9 @@ export default function MovieCardOverlay({ movie }: Properties) {
       <div className="absolute bottom-0 left-0 p-5">
         <h1 className="line-clamp-1 text-lg font-bold">{title}</h1>
         <div className="flex items-center gap-x-2">
-          <p className="text-sm font-normal">{release}</p>
+          <p className="text-sm font-normal">{releaseYear}</p>
           <p className="rounded border border-gray-200 px-1 py-0.5 text-sm font-normal">
-            {age}+
+            {ageRating}+
           </p>
           <p className="text-sm font-normal">{duration}h</p>
         </div>
@@ -77,15 +81,15 @@ export default function MovieCardOverlay({ movie }: Properties) {
       </div>
 
       <VideoPlayerModal
-        age={age}
+        age={ageRating}
         changeState={setIsPlayerOpen}
         duration={duration}
         key={id}
         overview={overview}
-        release={release}
+        release={releaseYear}
         state={isPlayerOpen}
         title={title}
-        youtubeUrl={youtubeString}
+        youtubeUrl={youtubeUrl}
       />
     </>
   );

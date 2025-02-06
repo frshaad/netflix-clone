@@ -1,88 +1,30 @@
-import prisma from '@/lib/database';
+import { and, eq } from 'drizzle-orm';
+
+import db from '@/db';
+import { movies, watchlist } from '@/db/schema';
+import { authenticateUser } from '@/lib/auth';
 import type { MediaCategory } from '@/types';
 
-export async function fetchMediasByCategory(
-  category: MediaCategory,
-  userId: string
-) {
-  switch (category) {
-    case 'shows': {
-      const data = await prisma.movie.findMany({
-        where: {
-          category: 'show',
-        },
-        select: {
-          age: true,
-          duration: true,
-          id: true,
-          title: true,
-          release: true,
-          imageString: true,
-          overview: true,
-          youtubeString: true,
-          watchlists: {
-            where: {
-              userId,
-            },
-          },
-        },
-      });
+export async function getMediaByCategory(category: MediaCategory) {
+  try {
+    const userId = await authenticateUser();
 
-      return data;
-    }
-
-    case 'movies': {
-      const data = await prisma.movie.findMany({
-        where: {
-          category: 'movie',
+    const result = await db.query.movies.findMany({
+      where: eq(movies.category, category),
+      with: {
+        watchlistItems: {
+          where: and(
+            eq(watchlist.userId, userId),
+            eq(watchlist.movieId, movies.id)
+          ),
         },
-        select: {
-          age: true,
-          duration: true,
-          id: true,
-          title: true,
-          release: true,
-          imageString: true,
-          overview: true,
-          youtubeString: true,
-          watchlists: {
-            where: {
-              userId,
-            },
-          },
-        },
-      });
+      },
+      orderBy: (movies, { asc }) => [asc(movies.releaseYear)],
+    });
 
-      return data;
-    }
-
-    case 'recently': {
-      const data = await prisma.movie.findMany({
-        where: {
-          category: 'recent',
-        },
-        select: {
-          age: true,
-          duration: true,
-          id: true,
-          title: true,
-          release: true,
-          imageString: true,
-          overview: true,
-          youtubeString: true,
-          watchlists: {
-            where: {
-              userId,
-            },
-          },
-        },
-      });
-
-      return data;
-    }
-
-    default: {
-      throw new Error("Couldn't fetch media");
-    }
+    return result;
+  } catch (error) {
+    console.error('Error fetching media by category:', error);
+    throw new Error("Couldn't fetch media");
   }
 }

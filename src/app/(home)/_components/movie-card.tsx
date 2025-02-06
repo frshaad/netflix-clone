@@ -1,12 +1,14 @@
 import Image from 'next/image';
 
+import type { movies, watchlist } from '@/db/schema';
 import { cn } from '@/lib/utils';
-import type { Movie } from '@/types';
 
 import MovieCardOverlay from './movie-card-overlay';
 
 type Properties = {
-  movie: Movie;
+  movie: typeof movies.$inferSelect & {
+    watchlistItems: (typeof watchlist.$inferSelect)[];
+  };
   large?: boolean;
 };
 
@@ -21,7 +23,7 @@ export default function MovieCard({ movie, large }: Properties) {
         alt="Movie"
         className="absolute size-full rounded-sm object-cover"
         height={400}
-        src={movie.imageString}
+        src={movie.imageUrl}
         width={500}
       />
 
@@ -31,7 +33,7 @@ export default function MovieCard({ movie, large }: Properties) {
             alt="Movie"
             className="absolute -z-10 size-full rounded-lg object-cover"
             height={800}
-            src={movie.imageString}
+            src={movie.imageUrl}
             width={800}
           />
 

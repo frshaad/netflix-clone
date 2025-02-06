@@ -1,4 +1,4 @@
-import { Button } from '@/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 import { postData } from './seed-database.action';
 

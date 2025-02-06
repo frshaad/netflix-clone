@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import prisma from '@/src/lib/database';
+import prisma from '@/lib/database';
 
 export async function removeFromWatchlist(formData: FormData) {
   const watchlistId = formData.get('watchlistId') as string;

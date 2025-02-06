@@ -1,4 +1,4 @@
-import prisma from '@/src/lib/database';
+import prisma from '@/lib/database';
 
 export const fetchUserWatchlist = async (userId: string) => {
   const data = await prisma.watchlist.findMany({

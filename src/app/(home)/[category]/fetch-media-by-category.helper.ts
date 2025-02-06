@@ -1,5 +1,5 @@
-import prisma from '@/src/lib/database';
-import type { MediaCategory } from '@/src/types';
+import prisma from '@/lib/database';
+import type { MediaCategory } from '@/types';
 
 export async function fetchMediasByCategory(
   category: MediaCategory,

@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@/lib/auth-options';
-import type { MediaCategory } from '@/src/types';
+import type { MediaCategory } from '@/types';
 
 import MovieCard from '../_components/movie-card';
 import { fetchMediasByCategory } from './fetch-media-by-category.helper';

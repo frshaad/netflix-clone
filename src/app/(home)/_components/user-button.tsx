@@ -1,19 +1,15 @@
 import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/lib/auth-options';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/src/components/ui/avatar';
-import { Button } from '@/src/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/src/components/ui/dropdown-menu';
+} from '@/components/ui/dropdown-menu';
+import { authOptions } from '@/lib/auth-options';
 
 import UserSignOutButton from './user-sign-out-button';
 

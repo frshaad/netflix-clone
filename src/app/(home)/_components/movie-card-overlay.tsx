@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import { Heart, HeartOff, PlayCircle } from 'lucide-react';
 
-import { Button } from '@/src/components/ui/button';
-import type { Movie } from '@/src/types';
+import { Button } from '@/components/ui/button';
+import type { Movie } from '@/types';
 
 import { addToWatchlist } from './add-to-watchlist.action';
 import { removeFromWatchlist } from './remove-from-watchlist.action';

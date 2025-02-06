@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import { cn } from '@/src/lib/utils';
-import type { Movie } from '@/src/types';
+import { cn } from '@/lib/utils';
+import type { Movie } from '@/types';
 
 import MovieCardOverlay from './movie-card-overlay';
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { InfoIcon, PlayCircle } from 'lucide-react';
 
-import { Button } from '@/src/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 import VideoPlayerModal from './video-player-modal';
 

@@ -2,19 +2,22 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { getServerSession } from 'next-auth';
+import { auth } from '@clerk/nextjs/server';
 
-import { authOptions } from '@/lib/auth-options';
-import prisma from '@/src/lib/database';
+import prisma from '@/lib/database';
 
 export async function addToWatchlist(formData: FormData) {
+  const { userId } = await auth();
+  if (!userId) {
+    throw new Error('You must be signed in to add an item to your cart');
+  }
+
   const movieId = formData.get('movieId');
   const pathname = formData.get('pathname') as string;
-  const session = await getServerSession(authOptions);
 
   await prisma.watchlist.create({
     data: {
-      userId: session?.user?.email as string,
+      userId,
       movieId: Number(movieId),
     },
   });

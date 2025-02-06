@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@/lib/auth-options';
-import type { Movie } from '@/src/types';
+import type { Movie } from '@/types';
 
 import MovieCard from '../../_components/movie-card';
 import { fetchUserWatchlist } from './fetch-user-watchlist.helper';

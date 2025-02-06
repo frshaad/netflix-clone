@@ -1,4 +1,4 @@
-import { getUserWatchlist } from '@/db/database-queries';
+import { getUserWatchlist } from '@/db/queries';
 
 import MovieCard from '../../_components/movie-card';
 

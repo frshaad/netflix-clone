@@ -7,21 +7,22 @@ import {
   text,
   timestamp,
   uuid,
+  varchar,
 } from 'drizzle-orm/pg-core';
 
 export const movies = pgTable(
   'movies',
   {
     id: serial().primaryKey(),
-    title: text().notNull(),
+    title: varchar({ length: 255 }).notNull(),
     overview: text().notNull(),
-    imageUrl: text().notNull(),
-    videoUrl: text().notNull(),
-    youtubeUrl: text().notNull(),
+    imageUrl: varchar({ length: 255 }).notNull(),
+    videoUrl: varchar({ length: 255 }).notNull(),
+    youtubeUrl: varchar({ length: 255 }).notNull(),
     ageRating: integer().notNull(),
     duration: integer().notNull(),
     releaseYear: integer().notNull(),
-    category: text().notNull(),
+    category: varchar({ length: 100 }).notNull(),
     createdAt: timestamp().defaultNow().notNull(),
     updatedAt: timestamp().defaultNow().notNull(),
   },
@@ -36,11 +37,12 @@ export const watchlist = pgTable(
   'watchlist',
   {
     id: uuid().primaryKey().defaultRandom(),
-    userId: text().notNull(),
+    userId: varchar({ length: 255 }).notNull(),
     movieId: integer()
       .references(() => movies.id, { onDelete: 'cascade' })
       .notNull(),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
+    createdAt: timestamp().defaultNow().notNull(),
+    updatedAt: timestamp().defaultNow().notNull(),
   },
   (table) => ({
     userMovieIdx: index('user_movie_idx').on(table.userId, table.movieId),

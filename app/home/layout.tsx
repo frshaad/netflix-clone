@@ -1,18 +1,19 @@
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
+import { redirect } from 'next/navigation';
 
-import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from 'next-auth';
 
-import Navbar from "./_components/Navbar";
+import { authOptions } from '@/lib/auth-options';
 
-type Props = {
+import Navbar from './_components/navbar';
+
+type Properties = {
   children: React.ReactNode;
 };
 
-export default async function HomeLayout({ children }: Props) {
+export default async function HomeLayout({ children }: Properties) {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/login");
+  if (!session) redirect('/login');
 
   return (
     <>

@@ -1,18 +1,20 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from 'next-auth';
 
-import { authOptions } from "@/lib/authOptions";
-import { MediaCategory } from "@/types";
+import { authOptions } from '@/lib/auth-options';
+import type { MediaCategory } from '@/types';
 
-import MovieCard from "../_components/MovieCard";
-import { fetchMediasByCategory } from "./fetchMediaByCategory.helper";
+import MovieCard from '../_components/movie-card';
+import { fetchMediasByCategory } from './fetch-media-by-category.helper';
 
-type Props = {
+type Properties = {
   params: {
     category: MediaCategory;
   };
 };
 
-export default async function CategoryPage({ params: { category } }: Props) {
+export default async function CategoryPage({
+  params: { category },
+}: Properties) {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.email;
 

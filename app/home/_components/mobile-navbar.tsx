@@ -1,14 +1,15 @@
-import { Menu } from "lucide-react";
-import Link from "next/link";
+import Link from 'next/link';
+
+import { Menu } from 'lucide-react';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import { links } from "./Navlinks.constant";
+import { links } from './navbar-links.constant';
 
 export default function MobileNavbar() {
   return (
@@ -20,10 +21,10 @@ export default function MobileNavbar() {
           </div>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuContent align="end" className="w-56" forceMount>
           {links.map((link) => (
-            <DropdownMenuItem key={link.id} className="cursor-pointer">
-              <Link href={link.href} className="w-full">
+            <DropdownMenuItem className="cursor-pointer" key={link.id}>
+              <Link className="w-full" href={link.href}>
                 {link.name}
               </Link>
             </DropdownMenuItem>

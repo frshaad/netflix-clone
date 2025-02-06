@@ -1,6 +1,5 @@
-import "./environment-config";
-
-import { type Environment, environmentSchema } from "./schema";
+import './environment-config';
+import { type Environment, environmentSchema } from './schema';
 
 export function validateEnvironment(): Environment {
   // eslint-disable-next-line n/no-process-env
@@ -8,10 +7,10 @@ export function validateEnvironment(): Environment {
 
   if (!parsed.success) {
     console.error(
-      "❌ Invalid environment variables:",
-      parsed.error.flatten().fieldErrors,
+      '❌ Invalid environment variables:',
+      parsed.error.flatten().fieldErrors
     );
-    throw new Error("Invalid environment variables");
+    throw new Error('Invalid environment variables');
   }
 
   return parsed.data;

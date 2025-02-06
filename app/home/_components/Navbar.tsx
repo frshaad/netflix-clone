@@ -1,24 +1,25 @@
-import { Bell, Search } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import Logo from "@/public/netflix_logo.svg";
+import { Bell, Search } from 'lucide-react';
 
-import MobileNavbar from "./MobileNavbar";
-import NavLink from "./NavLink";
-import { links } from "./Navlinks.constant";
-import UserButton from "./UserButton";
+import Logo from '@/public/netflix_logo.svg';
+
+import MobileNavbar from './mobile-navbar';
+import NavLink from './navbar-link';
+import { links } from './navbar-links.constant';
+import UserButton from './user-button';
 
 export default function Navbar() {
   return (
     <header className="mx-auto flex w-full max-w-7xl items-center justify-between p-5 sm:px-6 lg:px-8">
       <nav className="flex items-center">
-        <Link href="/home" className="w-32">
-          <Image src={Logo} alt="Netflix logo" priority />
+        <Link className="w-32" href="/home">
+          <Image alt="Netflix logo" src={Logo} priority />
         </Link>
         <ul className="ml-14 hidden gap-x-4 md:flex">
           {links.map((link) => (
-            <NavLink key={link.id} path={link.href} label={link.name} />
+            <NavLink key={link.id} label={link.name} path={link.href} />
           ))}
         </ul>
       </nav>

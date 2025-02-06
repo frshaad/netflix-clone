@@ -1,17 +1,17 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from 'next-auth';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { authOptions } from "@/lib/authOptions";
+} from '@/components/ui/dropdown-menu';
+import { authOptions } from '@/lib/auth-options';
 
-import UserSignOutButton from "./UserSignOutButton";
+import UserSignOutButton from './user-sign-out-button';
 
 export default async function UserButton() {
   const session = await getServerSession(authOptions);
@@ -20,15 +20,15 @@ export default async function UserButton() {
     return;
   }
 
-  const avatarSrc = session.user?.image || "/avatar.png";
-  const userShortName = session.user?.name?.slice(0, 2) || "un";
+  const avatarSource = session.user?.image || '/avatar.png';
+  const userShortName = session.user?.name?.slice(0, 2) || 'un';
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative size-10 rounded-sm">
+        <Button className="relative size-10 rounded-sm" variant="ghost">
           <Avatar className="size-10 rounded-sm">
-            <AvatarImage src={avatarSrc} />
+            <AvatarImage src={avatarSource} />
             <AvatarFallback className="rounded-sm uppercase">
               {userShortName}
             </AvatarFallback>
@@ -36,7 +36,7 @@ export default async function UserButton() {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-56" align="end" forceMount>
+      <DropdownMenuContent align="end" className="w-56" forceMount>
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-2">
             <p className="text-sm font-medium leading-none">

@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import { InfoIcon, PlayCircle } from "lucide-react";
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { InfoIcon, PlayCircle } from 'lucide-react';
 
-import VideoPlayerModal from "./VideoPlayerModal";
+import { Button } from '@/components/ui/button';
 
-type Props = {
+import VideoPlayerModal from './video-player-modal';
+
+type Properties = {
   overview: string;
   youtubeUrl: string;
   id: number;
@@ -25,33 +26,33 @@ export default function MovieButtons({
   releaseDate,
   title,
   youtubeUrl,
-}: Props) {
+}: Properties) {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
 
   return (
     <>
       <Button
-        onClick={() => setIsPlayerOpen(true)}
         className="text-lg font-medium"
+        onClick={() => setIsPlayerOpen(true)}
       >
         <PlayCircle className="mr-2 size-6" /> Play
       </Button>
 
       <Button
-        onClick={() => setIsPlayerOpen(true)}
         className="bg-white/40 text-lg font-medium text-white hover:bg-white/30"
+        onClick={() => setIsPlayerOpen(true)}
       >
         <InfoIcon className="mr-2 size-6" /> Learn More
       </Button>
 
       <VideoPlayerModal
-        state={isPlayerOpen}
-        changeState={setIsPlayerOpen}
         age={age}
+        changeState={setIsPlayerOpen}
         duration={duration}
         key={id}
         overview={overview}
         release={releaseDate}
+        state={isPlayerOpen}
         title={title}
         youtubeUrl={youtubeUrl}
       />

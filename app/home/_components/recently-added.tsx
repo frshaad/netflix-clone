@@ -1,9 +1,9 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from 'next-auth';
 
-import { authOptions } from "@/lib/authOptions";
+import { authOptions } from '@/lib/auth-options';
 
-import { fetchUserWatchlist } from "./feetchUserWatchlist";
-import MovieCard from "./MovieCard";
+import { fetchUserWatchlist } from './fetch-user-watchlist';
+import MovieCard from './movie-card';
 
 export default async function RecentlyAdded() {
   const session = await getServerSession(authOptions);

@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
+import { redirect } from 'next/navigation';
+
+import { getServerSession } from 'next-auth';
 
 import {
   Card,
@@ -7,16 +8,16 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { authOptions } from "@/lib/authOptions";
+} from '@/components/ui/card';
+import { authOptions } from '@/lib/auth-options';
 
-import AuthButton from "../_components/AuthButton";
+import AuthButton from '../_components/auth-button';
 
 export default async function LoginPage() {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect("/home");
+    redirect('/home');
   }
 
   return (

@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import prisma from '@/lib/database';
 
 export async function fetchUserWatchlist(userId: string) {
   const data = await prisma.movie.findMany({
@@ -18,7 +18,7 @@ export async function fetchUserWatchlist(userId: string) {
       duration: true,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
     take: 4,
   });

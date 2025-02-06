@@ -1,17 +1,19 @@
+import type { Dispatch, SetStateAction } from 'react';
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
-type Props = {
+type Properties = {
   title: string;
   overview: string;
   youtubeUrl: string;
   state: boolean;
-  changeState: any;
+  changeState: Dispatch<SetStateAction<boolean>>;
   release: number;
   age: number;
   duration: number;
@@ -26,7 +28,7 @@ export default function VideoPlayerModal({
   state,
   title,
   youtubeUrl,
-}: Props) {
+}: Properties) {
   return (
     <Dialog open={state} onOpenChange={() => changeState(!state)}>
       <DialogContent className="sm:max-w-[425px]">
@@ -41,7 +43,7 @@ export default function VideoPlayerModal({
             <p>{duration}h</p>
           </div>
         </DialogHeader>
-        <iframe src={youtubeUrl} height={250} className="w-full"></iframe>
+        <iframe className="w-full" height={250} src={youtubeUrl} />
       </DialogContent>
     </Dialog>
   );

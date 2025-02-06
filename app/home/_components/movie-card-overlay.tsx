@@ -1,19 +1,20 @@
-"use client";
+'use client';
 
-import { Heart, HeartOff, PlayCircle } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
-import { Button } from "@/components/ui/button";
-import type { Movie } from "@/types";
+import { Heart, HeartOff, PlayCircle } from 'lucide-react';
 
-import { addToWatchlist } from "./addToWatchlist.action";
-import { removeFromWatchlist } from "./removeFromWatchlist.action";
-import VideoPlayerModal from "./VideoPlayerModal";
+import { Button } from '@/components/ui/button';
+import type { Movie } from '@/types';
 
-type Props = { movie: Movie };
+import { addToWatchlist } from './add-to-watchlist.action';
+import { removeFromWatchlist } from './remove-from-watchlist.action';
+import VideoPlayerModal from './video-player-modal';
 
-export default function MovieCardOverlay({ movie }: Props) {
+type Properties = { movie: Movie };
+
+export default function MovieCardOverlay({ movie }: Properties) {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const pathname = usePathname();
 
@@ -28,29 +29,33 @@ export default function MovieCardOverlay({ movie }: Props) {
     youtubeString,
   } = movie;
 
-  const isWatchlist = watchlists.length > 0 ? true : false;
+  const isWatchlist = watchlists.length > 0;
   const watchlistId = watchlists[0]?.id;
 
   return (
     <>
-      <button onClick={() => setIsPlayerOpen(true)} className="-mt-14">
+      <button
+        className="-mt-14"
+        type="button"
+        onClick={() => setIsPlayerOpen(true)}
+      >
         <PlayCircle className="size-20" />
       </button>
 
       <div className="absolute right-5 top-5 z-10">
         {isWatchlist ? (
           <form action={removeFromWatchlist}>
-            <input type="hidden" name="watchlistId" value={watchlistId} />
-            <input type="hidden" name="pathname" value={pathname} />
-            <Button type="submit" variant="outline" size="icon">
+            <input name="watchlistId" type="hidden" value={watchlistId} />
+            <input name="pathname" type="hidden" value={pathname} />
+            <Button size="icon" type="submit" variant="outline">
               <HeartOff className="size-4 text-red-500" />
             </Button>
           </form>
         ) : (
           <form action={addToWatchlist}>
-            <input type="hidden" name="movieId" value={id} />
-            <input type="hidden" name="pathname" value={pathname} />
-            <Button type="submit" variant="outline" size="icon">
+            <input name="movieId" type="hidden" value={id} />
+            <input name="pathname" type="hidden" value={pathname} />
+            <Button size="icon" type="submit" variant="outline">
               <Heart className="size-4 text-red-500" />
             </Button>
           </form>
@@ -72,13 +77,13 @@ export default function MovieCardOverlay({ movie }: Props) {
       </div>
 
       <VideoPlayerModal
-        key={id}
-        state={isPlayerOpen}
-        changeState={setIsPlayerOpen}
         age={age}
+        changeState={setIsPlayerOpen}
         duration={duration}
+        key={id}
         overview={overview}
         release={release}
+        state={isPlayerOpen}
         title={title}
         youtubeUrl={youtubeString}
       />

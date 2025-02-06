@@ -1,36 +1,37 @@
-"use client";
+'use client';
 
-import { Loader2 } from "lucide-react";
-import { BuiltInProviderType } from "next-auth/providers/index";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
-import { FaGithub, FaGoogle } from "react-icons/fa6";
+import { useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Loader2 } from 'lucide-react';
+import type { BuiltInProviderType } from 'next-auth/providers/index';
+import { signIn } from 'next-auth/react';
+import { FaGithub, FaGoogle } from 'react-icons/fa6';
 
-type Props = {
+import { Button } from '@/components/ui/button';
+
+type Properties = {
   provider: BuiltInProviderType;
 };
 
-export default function AuthButton({ provider }: Props) {
+export default function AuthButton({ provider }: Properties) {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Button
+      className="flex items-center gap-4"
+      disabled={isLoading}
+      size="lg"
+      variant="outline"
       onClick={async () => {
         setIsLoading(true);
         await signIn(provider);
       }}
-      variant="outline"
-      size="lg"
-      className="flex items-center gap-4"
-      disabled={isLoading}
     >
       {isLoading ? (
         <Loader2 className="size-5 animate-spin" />
       ) : (
         <div>
-          {provider === "github" ? (
+          {provider === 'github' ? (
             <FaGithub size={20} />
           ) : (
             <FaGoogle size={20} />

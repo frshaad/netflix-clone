@@ -1,10 +1,10 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from 'next-auth';
 
-import { authOptions } from "@/lib/authOptions";
-import type { Movie } from "@/types";
+import { authOptions } from '@/lib/auth-options';
+import type { Movie } from '@/types';
 
-import MovieCard from "../../_components/MovieCard";
-import { fetchUserWatchlist } from "./fetchUserWatchlist.helper";
+import MovieCard from '../../_components/movie-card';
+import { fetchUserWatchlist } from './fetch-user-watchlist.helper';
 
 export default async function WatchlistPage() {
   const session = await getServerSession(authOptions);

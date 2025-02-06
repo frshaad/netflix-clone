@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import { postData } from "./seedDB.action";
+import { postData } from './seed-database.action';
 
 export default function SeedDatabase() {
   return (

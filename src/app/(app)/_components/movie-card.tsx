@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-import type { movies, watchlist } from '@/db/schema';
+import type { movie, watchlist } from '@/db/schema';
 import { cn } from '@/lib/utils';
 
 import MovieCardOverlay from './movie-card-overlay';
 
 type Properties = {
-  movie: typeof movies.$inferSelect & {
+  movie: typeof movie.$inferSelect & {
     watchlistItems: (typeof watchlist.$inferSelect)[];
   };
   large?: boolean;

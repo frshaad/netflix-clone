@@ -6,14 +6,14 @@ import { useState } from 'react';
 import { Heart, HeartOff, PlayCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import type { movies, watchlist } from '@/db/schema';
+import type { movie, watchlist } from '@/db/schema';
 
 import { addToWatchlist } from '../../../actions/add-to-watchlist.action';
 import { removeFromWatchlist } from '../../../actions/remove-from-watchlist.action';
 import VideoPlayerModal from './video-player-modal';
 
 type Properties = {
-  movie: typeof movies.$inferSelect & {
+  movie: typeof movie.$inferSelect & {
     watchlistItems: (typeof watchlist.$inferSelect)[];
   };
 };

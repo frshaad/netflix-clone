@@ -1,25 +1,25 @@
 import { and, eq } from 'drizzle-orm';
 
 import db from '@/db';
-import { movies, watchlist } from '@/db/schema';
+import type { MediaCategory } from '@/db/schema';
+import { movie, watchlist } from '@/db/schema';
 import { authenticateUser } from '@/lib/auth';
-import type { MediaCategory } from '@/types';
 
 export async function getMediaByCategory(category: MediaCategory) {
   try {
     const userId = await authenticateUser();
 
-    const result = await db.query.movies.findMany({
-      where: eq(movies.category, category),
+    const result = await db.query.movie.findMany({
+      where: eq(movie.category, category),
       with: {
         watchlistItems: {
           where: and(
             eq(watchlist.userId, userId),
-            eq(watchlist.movieId, movies.id)
+            eq(watchlist.movieId, movie.id)
           ),
         },
       },
-      orderBy: (movies, { asc }) => [asc(movies.releaseYear)],
+      orderBy: (movie, { asc }) => [asc(movie.releaseYear)],
     });
 
     return result;

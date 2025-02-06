@@ -1,6 +1,6 @@
-import type { movies } from '@/db/schema';
+import type { movie } from '@/db/schema';
 
-export const movieDatabase: (typeof movies.$inferInsert)[] = [
+export const movieDatabase: (typeof movie.$inferInsert)[] = [
   {
     title: 'Gran Turismo',
     ageRating: 12,

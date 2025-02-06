@@ -6,7 +6,7 @@ import * as schema from '@/db/schema';
 
 import { movieDatabase } from './seed.constant';
 
-export const TABLES_TO_CLEAR = [schema.movies, schema.watchlist];
+export const TABLES_TO_CLEAR = [schema.movie, schema.watchlist];
 
 async function clearTable(table: any) {
   try {
@@ -37,7 +37,7 @@ async function clearTables() {
 
 async function seedTables() {
   console.info('🌱 Seeding tables...');
-  await seedTable(schema.movies, movieDatabase, 'movies');
+  await seedTable(schema.movie, movieDatabase, 'movie');
 }
 
 export async function seed() {

@@ -2,6 +2,7 @@ import { relations } from 'drizzle-orm';
 import {
   index,
   integer,
+  pgEnum,
   pgTable,
   serial,
   text,
@@ -10,8 +11,11 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-export const movies = pgTable(
-  'movies',
+export const mediaEnum = pgEnum('media_category', ['recent', 'movie', 'show']);
+export type MediaCategory = (typeof mediaEnum.enumValues)[number];
+
+export const movie = pgTable(
+  'movie',
   {
     id: serial().primaryKey(),
     title: varchar({ length: 255 }).notNull(),
@@ -22,7 +26,7 @@ export const movies = pgTable(
     ageRating: integer().notNull(),
     duration: integer().notNull(),
     releaseYear: integer().notNull(),
-    category: varchar({ length: 100 }).notNull(),
+    category: mediaEnum().notNull(),
     createdAt: timestamp().defaultNow().notNull(),
     updatedAt: timestamp().defaultNow().notNull(),
   },
@@ -39,7 +43,7 @@ export const watchlist = pgTable(
     id: uuid().primaryKey().defaultRandom(),
     userId: varchar({ length: 255 }).notNull(),
     movieId: integer()
-      .references(() => movies.id, { onDelete: 'cascade' })
+      .references(() => movie.id, { onDelete: 'cascade' })
       .notNull(),
     createdAt: timestamp().defaultNow().notNull(),
     updatedAt: timestamp().defaultNow().notNull(),
@@ -51,13 +55,13 @@ export const watchlist = pgTable(
 );
 
 // Relations
-export const moviesRelations = relations(movies, ({ many }) => ({
+export const moviesRelations = relations(movie, ({ many }) => ({
   watchlistItems: many(watchlist),
 }));
 
 export const watchlistRelations = relations(watchlist, ({ one }) => ({
-  movie: one(movies, {
+  movie: one(movie, {
     fields: [watchlist.movieId],
-    references: [movies.id],
+    references: [movie.id],
   }),
 }));

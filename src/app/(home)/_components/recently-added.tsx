@@ -1,13 +1,9 @@
-import { getServerSession } from 'next-auth';
+import { getUserWatchlist } from '@/db/database-queries';
 
-import { authOptions } from '@/lib/auth-options';
-
-import { fetchUserWatchlist } from './fetch-user-watchlist';
 import MovieCard from './movie-card';
 
 export default async function RecentlyAdded() {
-  const session = await getServerSession(authOptions);
-  const movies = await fetchUserWatchlist(session?.user?.email as string);
+  const movies = await getUserWatchlist();
 
   return (
     <section className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

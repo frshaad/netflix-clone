@@ -8,8 +8,8 @@ import { Heart, HeartOff, PlayCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { movies, watchlist } from '@/db/schema';
 
-import { addToWatchlist } from './add-to-watchlist.action';
-import { removeFromWatchlist } from './remove-from-watchlist.action';
+import { addToWatchlist } from '../../../actions/add-to-watchlist.action';
+import { removeFromWatchlist } from '../../../actions/remove-from-watchlist.action';
 import VideoPlayerModal from './video-player-modal';
 
 type Properties = {

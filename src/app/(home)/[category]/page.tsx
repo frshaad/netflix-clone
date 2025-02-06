@@ -1,9 +1,9 @@
 import { auth } from '@clerk/nextjs/server';
 
+import { getMediaByCategory } from '@/db/database-queries';
 import type { MediaCategory } from '@/types';
 
 import MovieCard from '../_components/movie-card';
-import { getMediaByCategory } from './fetch-media-by-category.helper';
 
 type Properties = {
   params: Promise<{ category: MediaCategory }>;

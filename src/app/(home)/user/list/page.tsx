@@ -1,17 +1,9 @@
-import { getServerSession } from 'next-auth';
-
-import { authOptions } from '@/lib/auth-options';
-import type { Movie } from '@/types';
+import { getUserWatchlist } from '@/db/database-queries';
 
 import MovieCard from '../../_components/movie-card';
-import { fetchUserWatchlist } from './fetch-user-watchlist.helper';
 
 export default async function WatchlistPage() {
-  const session = await getServerSession(authOptions);
-
-  if (!session?.user?.email) return;
-
-  const userList = await fetchUserWatchlist(session?.user?.email);
+  const userList = await getUserWatchlist();
 
   return (
     <>
@@ -19,8 +11,8 @@ export default async function WatchlistPage() {
         Your Watchlist
       </h1>
       <section className="mt-10 grid grid-cols-1 gap-6 px-5 sm:grid-cols-2 sm:px-0 md:grid-cols-3 lg:grid-cols-4">
-        {userList.map((item) => (
-          <MovieCard key={item.Movie?.id} movie={item.Movie as Movie} />
+        {userList.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </section>
     </>

@@ -1,4 +1,4 @@
-import { findMovie } from './find-movie.helper';
+import { findMovie } from '../../../db/s/find-movie.helper';
 import MovieButtons from './movie-buttons';
 
 export default async function MovieClip() {

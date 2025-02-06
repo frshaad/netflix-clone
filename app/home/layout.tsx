@@ -1,20 +1,10 @@
-import { redirect } from 'next/navigation';
-
-import { getServerSession } from 'next-auth';
-
-import { authOptions } from '@/lib/auth-options';
-
 import Navbar from './_components/navbar';
 
 type Properties = {
   children: React.ReactNode;
 };
 
-export default async function HomeLayout({ children }: Properties) {
-  const session = await getServerSession(authOptions);
-
-  if (!session) redirect('/login');
-
+export default function HomeLayout({ children }: Properties) {
   return (
     <>
       <Navbar />

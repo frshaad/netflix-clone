@@ -7,15 +7,12 @@ import MovieCard from '../_components/movie-card';
 import { fetchMediasByCategory } from './fetch-media-by-category.helper';
 
 type Properties = {
-  params: {
-    category: MediaCategory;
-  };
+  params: Promise<{ category: MediaCategory }>;
 };
 
-export default async function CategoryPage({
-  params: { category },
-}: Properties) {
+export default async function CategoryPage({ params }: Properties) {
   const session = await getServerSession(authOptions);
+  const { category } = await params;
   const userId = session?.user?.email;
 
   if (!userId) {

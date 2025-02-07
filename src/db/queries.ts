@@ -1,49 +1,89 @@
-import { and, eq } from 'drizzle-orm';
+import { asc, desc, eq, like } from 'drizzle-orm';
 
 import db from '@/db';
-import type { MediaCategory } from '@/db/schema';
-import { movie, watchlist } from '@/db/schema';
+import { movie, show, watchlist } from '@/db/schema';
 import { authenticateUser } from '@/lib/auth';
 
-export async function getMediaByCategory(category: MediaCategory) {
-  try {
-    const userId = await authenticateUser();
+type MediaType = 'movie' | 'show' | 'all';
+type SortField = 'title' | 'releaseYear' | 'createdAt';
+type SortOrder = 'asc' | 'desc';
 
-    const result = await db.query.movie.findMany({
-      where: eq(movie.category, category),
-      with: {
-        watchlistItems: {
-          where: and(
-            eq(watchlist.userId, userId),
-            eq(watchlist.movieId, movie.id)
-          ),
-        },
-      },
-      orderBy: (movie, { asc }) => [asc(movie.releaseYear)],
-    });
+type MediaListParameters = {
+  type?: MediaType;
+  sortBy?: SortField;
+  order?: SortOrder;
+  limit?: number;
+  offset?: number;
+  searchQuery?: string;
+};
 
-    return result;
-  } catch (error) {
-    console.error('Error fetching media by category:', error);
-    throw new Error("Couldn't fetch media");
-  }
+export async function getMediaList({
+  type = 'all',
+  sortBy = 'releaseYear',
+  order = 'desc',
+  limit = 50,
+  offset = 0,
+  searchQuery,
+}: MediaListParameters) {
+  const sortFunction = order === 'asc' ? asc : desc;
+  const search = searchQuery ? `%${searchQuery}%` : undefined;
+
+  const [movies, shows] = await Promise.all([
+    type === 'show'
+      ? Promise.resolve([])
+      : db.query.movie.findMany({
+          limit,
+          offset,
+          where: search ? like(movie.title, search) : undefined,
+          orderBy: sortFunction(movie[sortBy]),
+        }),
+
+    type === 'movie'
+      ? Promise.resolve([])
+      : db.query.show.findMany({
+          limit,
+          offset,
+          where: search ? like(show.title, search) : undefined,
+          orderBy: sortFunction(show[sortBy]),
+        }),
+  ]);
+
+  return {
+    movies: type === 'show' ? [] : movies,
+    shows: type === 'movie' ? [] : shows,
+    metadata: { limit, offset, type, sortBy, order },
+  };
 }
 
 export async function getUserWatchlist() {
   const userId = await authenticateUser();
 
-  const result = await db.query.watchlist.findMany({
+  const userWatchlist = await db.query.watchlist.findMany({
     where: eq(watchlist.userId, userId),
-    with: { movie: true },
+    with: {
+      items: {
+        with: {
+          movie: true,
+          show: true,
+        },
+      },
+    },
   });
 
-  return result;
+  return userWatchlist;
 }
 
-export async function findMovie(query: string) {
-  const result = await db.query.movie.findFirst({
-    where: eq(movie.title, query),
-  });
+export async function searchMedia(query: string) {
+  const searchQuery = `%${query}%`;
 
-  return result;
+  const [movies, shows] = await Promise.all([
+    db.query.movie.findMany({
+      where: like(movie.title, searchQuery),
+    }),
+    db.query.show.findMany({
+      where: like(show.title, searchQuery),
+    }),
+  ]);
+
+  return { movies, shows };
 }

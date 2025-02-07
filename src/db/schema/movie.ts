@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
   index,
   integer,
@@ -7,6 +8,8 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
+
+import { watchlistItem } from '@/db/schema';
 
 export const movie = pgTable(
   'movie',
@@ -29,6 +32,6 @@ export const movie = pgTable(
   })
 );
 
-// export const movieRelations = relations(movie, ({ many }) => ({
-//   watchlists: many(watchlist),
-// }));
+export const movieRelations = relations(movie, ({ many }) => ({
+  watchlistItems: many(watchlistItem, { relationName: 'movieWatchlistItems' }),
+}));

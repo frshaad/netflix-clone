@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
   index,
   integer,
@@ -8,6 +9,8 @@ import {
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
+
+import { watchlistItem } from '@/db/schema';
 
 const showStatusEnum = pgEnum('show_status', [
   'Ongoing',
@@ -39,6 +42,6 @@ export const show = pgTable(
   })
 );
 
-// export const showsRelations = relations(show, ({ many }) => ({
-//   watchlists: many(watchlist),
-// }));
+export const showRelations = relations(show, ({ many }) => ({
+  watchlistItems: many(watchlistItem, { relationName: 'showWatchlistItems' }),
+}));

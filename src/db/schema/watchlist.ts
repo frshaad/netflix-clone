@@ -4,38 +4,60 @@ import {
   integer,
   pgEnum,
   pgTable,
-  serial,
+  primaryKey,
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
 
-import { movie } from './movie';
-import { show } from './show';
+import { movie, show } from '@/db/schema';
 
 const mediaTypeEnum = pgEnum('media_type', ['movie', 'show']);
 export type MediaType = (typeof mediaTypeEnum.enumValues)[number];
 
-export const watchlist = pgTable(
-  'watchlist',
+export const watchlist = pgTable('watchlist', {
+  userId: varchar({ length: 255 }).primaryKey(),
+  createdAt: timestamp().defaultNow().notNull(),
+  updatedAt: timestamp().defaultNow().notNull(),
+});
+
+export const watchlistItem = pgTable(
+  'watchlist_item',
   {
-    id: serial().primaryKey(),
-    userId: varchar({ length: 255 }).notNull(),
+    watchlistUserId: varchar({ length: 255 })
+      .notNull()
+      .references(() => watchlist.userId),
     mediaId: integer().notNull(),
     mediaType: mediaTypeEnum().notNull(),
     createdAt: timestamp().defaultNow().notNull(),
-    updatedAt: timestamp().defaultNow().notNull(),
   },
   (table) => ({
-    userMediaIdx: index('user_media_idx').on(
-      table.userId,
+    pk: primaryKey({
+      columns: [table.watchlistUserId, table.mediaId, table.mediaType],
+    }),
+    mediaIdx: index('watchlist_item_media_idx').on(
       table.mediaId,
       table.mediaType
     ),
-    mediaIdx: index('media_idx').on(table.mediaId),
   })
 );
 
 export const watchlistRelations = relations(watchlist, ({ many }) => ({
-  movies: many(movie),
-  shows: many(show),
+  items: many(watchlistItem),
+}));
+
+export const watchlistItemRelations = relations(watchlistItem, ({ one }) => ({
+  watchlist: one(watchlist, {
+    fields: [watchlistItem.watchlistUserId],
+    references: [watchlist.userId],
+  }),
+  movie: one(movie, {
+    fields: [watchlistItem.mediaId],
+    references: [movie.id],
+    relationName: 'movieWatchlistItems',
+  }),
+  show: one(show, {
+    fields: [watchlistItem.mediaId],
+    references: [show.id],
+    relationName: 'showWatchlistItems',
+  }),
 }));

@@ -1,7 +1,21 @@
 {
   "name": "netflix-clone",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
+  "author": {
+    "name": "Farshad Hatami",
+    "email": "frshaad@protonmail.com",
+    "url": "https://github.com/frshaad"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frshaad/netflix-clone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/frshaad/netflix-clone/issues"
+  },
+  "homepage": "https://netflix-next-clone-rho.vercel.app/",
   "engines": {
     "node": "20"
   },

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the Netflix Clone, a project developed using Next.js, Tailwind CSS, and TypeScript. This application replicates an small part of the original website. Just a practice.
+Welcome to the Netflix Clone, a project developed using Next.js 15, Tailwind CSS, and TypeScript. This application replicates an small part of the original website. Just a practice.
 
 ## Screenshots
 
@@ -11,7 +11,7 @@ Welcome to the Netflix Clone, a project developed using Next.js, Tailwind CSS, a
 
 ## Tech Stack
 
-![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)![shadcn/ui](https://img.shields.io/static/v1?style=for-the-badge&message=shadcn%2Fui&color=000000&logo=shadcn%2Fui&logoColor=FFFFFF&label=)![Prisma](https://img.shields.io/static/v1?style=for-the-badge&message=Prisma&color=2D3748&logo=Prisma&logoColor=FFFFFF&label=)![Supabase](https://img.shields.io/static/v1?style=for-the-badge&message=Supabase&color=222222&logo=Supabase&logoColor=3FCF8E&label=)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)![shadcn/ui](https://img.shields.io/static/v1?style=for-the-badge&message=shadcn%2Fui&color=000000&logo=shadcn%2Fui&logoColor=FFFFFF&label=)![Drizzle](https://img.shields.io/static/v1?style=for-the-badge&message=Drizzle&color=C5F74F&logo=Drizzle&logoColor=000000&label=)![Neon](https://img.shields.io/static/v1?style=for-the-badge&message=Neon&color=000000&logo=Neon&logoColor=FFFFFF&label=)
 
 ## Getting Started
 
@@ -30,6 +30,20 @@ npm i
 pnpm i
 # or
 yarn install
+```
+
+Set up your environment variables:
+
+```bash
+cp .env.example .env
+```
+
+Initialize and sync the database:
+
+```bash
+npm run db:generate
+npm run db:push
+npm run db:seed
 ```
 
 And run the development server:

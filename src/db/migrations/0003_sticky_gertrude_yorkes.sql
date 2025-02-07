@@ -1,0 +1,1 @@
+CREATE TYPE "public"."media_type" AS ENUM('movie', 'show');

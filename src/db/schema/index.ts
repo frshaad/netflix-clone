@@ -1,6 +1,7 @@
 export { movie, movieRelations } from './movie';
-export { show, showRelations, type ShowStatus } from './show';
+export { show, showRelations, showStatusEnum, type ShowStatus } from './show';
 export {
+  mediaTypeEnum,
   watchlist,
   watchlistItem,
   watchlistItemRelations,

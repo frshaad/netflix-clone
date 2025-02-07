@@ -4,7 +4,7 @@ import { exit } from 'node:process';
 import db from '@/db';
 import * as schema from '@/db/schema';
 
-import { movieDatabase } from './seed.constant';
+import { movieData, showData } from './seed.data';
 
 export const TABLES_TO_CLEAR = [schema.movie, schema.watchlist];
 
@@ -38,7 +38,8 @@ async function clearTables() {
 
 async function seedTables() {
   console.info('🌱 Seeding tables...');
-  await seedTable(schema.movie, movieDatabase, 'movie');
+  await seedTable(schema.movie, movieData, 'movie');
+  await seedTable(schema.show, showData, 'tv shows');
 }
 
 export async function seed() {

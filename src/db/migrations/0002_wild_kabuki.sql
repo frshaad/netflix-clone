@@ -1,0 +1,1 @@
+CREATE TYPE "public"."show_status" AS ENUM('Ongoing', 'Completed', 'Cancelled');

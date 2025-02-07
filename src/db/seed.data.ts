@@ -37,6 +37,90 @@ export const movieData: (typeof movie.$inferInsert)[] = [
     releaseYear: 2014,
     duration: 169,
   },
+  {
+    title: 'The Dark Knight',
+    overview:
+      'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
+    videoUrl: 'https://examples.com/dark-knight.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=EXeTwQWrcwY',
+    ageRating: 12,
+    releaseYear: 2008,
+    duration: 152,
+  },
+  {
+    title: 'Pulp Fiction',
+    overview:
+      'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg',
+    videoUrl: 'https://examples.com/pulp-fiction.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=s7EdQ4FqbhY',
+    ageRating: 18,
+    releaseYear: 1994,
+    duration: 154,
+  },
+  {
+    title: 'The Matrix',
+    overview:
+      'A computer programmer discovers that reality as he knows it is a simulation created by machines, and joins a rebellion to break free.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg',
+    videoUrl: 'https://examples.com/matrix.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=vKQi3bBA1y8',
+    ageRating: 15,
+    releaseYear: 1999,
+    duration: 136,
+  },
+  {
+    title: 'Goodfellas',
+    overview:
+      'The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners Jimmy Conway and Tommy DeVito.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/aKuFiU82s5ISJpGZp7YkIr3kCUd.jpg',
+    videoUrl: 'https://examples.com/goodfellas.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=2ilzidi_J8Q',
+    ageRating: 18,
+    releaseYear: 1990,
+    duration: 146,
+  },
+  {
+    title: 'Fight Club',
+    overview:
+      'An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
+    videoUrl: 'https://examples.com/fight-club.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=SUXWAEX2jlg',
+    ageRating: 18,
+    releaseYear: 1999,
+    duration: 139,
+  },
+  {
+    title: 'Forrest Gump',
+    overview:
+      'The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/saHP97rTPS5eLmrLQEcANmKrsFl.jpg',
+    videoUrl: 'https://examples.com/forrest-gump.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=bLvqoHBptjg',
+    ageRating: 12,
+    releaseYear: 1994,
+    duration: 142,
+  },
+  {
+    title: 'The Godfather',
+    overview:
+      'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/3bhkrj58Vtu7enYsRolD1fZdja1.jpg',
+    videoUrl: 'https://examples.com/godfather.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=sY1S34973zA',
+    ageRating: 18,
+    releaseYear: 1972,
+    duration: 175,
+  },
 ];
 
 export const showData: (typeof show.$inferInsert)[] = [
@@ -81,5 +165,103 @@ export const showData: (typeof show.$inferInsert)[] = [
     seasons: 6,
     episodeCount: 60,
     status: 'Completed',
+  },
+  {
+    title: 'Game of Thrones',
+    overview:
+      'Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
+    videoUrl: 'https://examples.com/got.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=KPLWWIOCOOQ',
+    ageRating: 18,
+    releaseYear: 2011,
+    seasons: 8,
+    episodeCount: 73,
+    status: 'Completed',
+  },
+  {
+    title: 'The Wire',
+    overview:
+      'The Baltimore drug scene, seen through the eyes of drug dealers and law enforcement.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/4lbclFySvugI51fwsyxBXfo1CMf.jpg',
+    videoUrl: 'https://examples.com/the-wire.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=uDcQbk78CSw',
+    ageRating: 18,
+    releaseYear: 2002,
+    seasons: 5,
+    episodeCount: 60,
+    status: 'Completed',
+  },
+  {
+    title: 'Chernobyl',
+    overview:
+      "In April 1986, an explosion at the Chernobyl nuclear power plant in the Union of Soviet Socialist Republics becomes one of the world's worst man-made catastrophes.",
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg',
+    videoUrl: 'https://examples.com/chernobyl.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=s9APLXM9Ei8',
+    ageRating: 18,
+    releaseYear: 2019,
+    seasons: 1,
+    episodeCount: 5,
+    status: 'Completed',
+  },
+  {
+    title: 'Better Call Saul',
+    overview:
+      'The trials and tribulations of criminal lawyer Jimmy McGill before his fateful run-in with Walter White and Jesse Pinkman.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/fC2HDm5t0kHl7mTm7jxMR31b7by.jpg',
+    videoUrl: 'https://examples.com/better-call-saul.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=HN4oydykJFc',
+    ageRating: 18,
+    releaseYear: 2015,
+    seasons: 6,
+    episodeCount: 63,
+    status: 'Completed',
+  },
+  {
+    title: 'Fargo',
+    overview:
+      'Various chronicles of deception, intrigue and murder in and around frozen Minnesota.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/3IkPwje9zK4nL4UxubD7RBJ3era.jpg',
+    videoUrl: 'https://examples.com/fargo.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=gZpYeFLmYJw',
+    ageRating: 18,
+    releaseYear: 2014,
+    seasons: 5,
+    episodeCount: 41,
+    status: 'Ongoing',
+  },
+  {
+    title: 'True Detective',
+    overview:
+      'Seasonal anthology series in which police investigations unearth the personal and professional secrets of those involved, both within and outside the law.',
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/edHgXEtPbyVIQ7xKb1cvJJqTVhA.jpg',
+    videoUrl: 'https://examples.com/true-detective.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=fVQUcaO4AvE',
+    ageRating: 18,
+    releaseYear: 2014,
+    seasons: 3,
+    episodeCount: 24,
+    status: 'Ongoing',
+  },
+  {
+    title: 'The Last of Us',
+    overview:
+      "Twenty years after modern civilization has been destroyed, a hardened survivor takes charge of a 14-year-old girl who may be humanity's last hope.",
+    imageUrl:
+      'https://image.tmdb.org/t/p/original/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',
+    videoUrl: 'https://examples.com/last-of-us.mp4',
+    youtubeUrl: 'https://www.youtube.com/watch?v=uLtkt8BonwM',
+    ageRating: 18,
+    releaseYear: 2023,
+    seasons: 1,
+    episodeCount: 9,
+    status: 'Ongoing',
   },
 ];

@@ -9,7 +9,7 @@ import {
 
 import { movie, show } from '@/db/schema';
 
-const mediaTypeEnum = pgEnum('media_type', ['movie', 'show']);
+export const mediaTypeEnum = pgEnum('media_type', ['movie', 'show']);
 export type MediaType = (typeof mediaTypeEnum.enumValues)[number];
 
 export const watchlist = pgTable('watchlist', {

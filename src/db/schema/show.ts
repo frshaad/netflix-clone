@@ -11,7 +11,7 @@ import {
 
 import { watchlistItem } from '@/db/schema';
 
-const showStatusEnum = pgEnum('show_status', [
+export const showStatusEnum = pgEnum('show_status', [
   'Ongoing',
   'Completed',
   'Cancelled',

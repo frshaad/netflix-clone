@@ -1,10 +1,8 @@
 import { relations } from 'drizzle-orm';
 import {
-  index,
   integer,
   pgEnum,
   pgTable,
-  primaryKey,
   timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -20,26 +18,14 @@ export const watchlist = pgTable('watchlist', {
   updatedAt: timestamp().defaultNow().notNull(),
 });
 
-export const watchlistItem = pgTable(
-  'watchlist_item',
-  {
-    watchlistUserId: varchar({ length: 255 })
-      .notNull()
-      .references(() => watchlist.userId),
-    mediaId: integer().notNull(),
-    mediaType: mediaTypeEnum().notNull(),
-    createdAt: timestamp().defaultNow().notNull(),
-  },
-  (table) => ({
-    pk: primaryKey({
-      columns: [table.watchlistUserId, table.mediaId, table.mediaType],
-    }),
-    mediaIdx: index('watchlist_item_media_idx').on(
-      table.mediaId,
-      table.mediaType
-    ),
-  })
-);
+export const watchlistItem = pgTable('watchlist_item', {
+  watchlistUserId: varchar({ length: 255 })
+    .notNull()
+    .references(() => watchlist.userId),
+  mediaId: integer().notNull(),
+  mediaType: mediaTypeEnum().notNull(),
+  createdAt: timestamp().defaultNow().notNull(),
+});
 
 export const watchlistRelations = relations(watchlist, ({ many }) => ({
   items: many(watchlistItem),

@@ -11,7 +11,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-export const mediaEnum = pgEnum('media_category', ['recent', 'movie', 'show']);
+export const mediaEnum = pgEnum('media_category', ['movie', 'show']);
 export type MediaCategory = (typeof mediaEnum.enumValues)[number];
 
 export const movie = pgTable(

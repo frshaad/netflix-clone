@@ -10,6 +10,7 @@ export const TABLES_TO_CLEAR = [schema.movie, schema.watchlist];
 
 async function clearTable(table: any) {
   try {
+    /* eslint-disable-next-line drizzle/enforce-delete-with-where */
     await db.delete(table);
     console.info(`✓ Cleared ${table.name}`);
   } catch (error) {

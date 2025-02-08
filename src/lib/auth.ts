@@ -1,3 +1,5 @@
+import { cache } from 'react';
+
 import { auth } from '@clerk/nextjs/server';
 
 class AuthorizationError extends Error {
@@ -6,11 +8,10 @@ class AuthorizationError extends Error {
     this.name = 'AuthorizationError';
   }
 }
-
-export async function authenticateUser() {
+export const authenticateUser = cache(async () => {
   const { userId } = await auth();
   if (!userId) {
     throw new AuthorizationError();
   }
   return userId;
-}
+});

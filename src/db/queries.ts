@@ -1,16 +1,17 @@
-import { asc, desc, eq, like } from 'drizzle-orm';
+import { cache } from 'react';
+
+import { and, asc, desc, eq, like } from 'drizzle-orm';
 
 import db from '@/db';
 import { movie, show, watchlistItem } from '@/db/schema';
 import { authenticateUser } from '@/lib/auth';
-import type { MediaItem } from '@/types';
+import type { MediaItem, MediaType } from '@/types';
 
-type MediaType = 'movie' | 'show' | 'all';
 type SortField = 'title' | 'releaseYear' | 'createdAt';
 type SortOrder = 'asc' | 'desc';
 
 type MediaListParameters = {
-  type?: MediaType;
+  type?: MediaType | 'all';
   sortBy?: SortField;
   order?: SortOrder;
   limit?: number;
@@ -92,3 +93,23 @@ export async function searchMedia(query: string) {
 
   return { movies, shows };
 }
+
+export const isInWatchlist = cache(
+  async (mediaId: number, mediaType: MediaType) => {
+    const userId = await authenticateUser();
+
+    const existing = await db
+      .select({ id: watchlistItem.id })
+      .from(watchlistItem)
+      .where(
+        and(
+          eq(watchlistItem.watchlistUserId, userId),
+          eq(watchlistItem.mediaId, mediaId),
+          eq(watchlistItem.mediaType, mediaType)
+        )
+      )
+      .limit(1);
+
+    return existing.length > 0;
+  }
+);

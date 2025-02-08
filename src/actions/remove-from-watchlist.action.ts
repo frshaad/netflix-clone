@@ -1,12 +1,31 @@
 'use server';
 
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 
 import db from '@/db';
-import { watchlist } from '@/db/schema';
+import { isInWatchlist } from '@/db/queries';
+import { watchlistItem } from '@/db/schema';
+import { authenticateUser } from '@/lib/auth';
+import type { MediaType } from '@/types';
 
-export async function removeFromWatchlist(formData: FormData) {
-  const watchlistId = formData.get('watchlistId') as string;
+export async function removeFromWatchlist(
+  mediaId: number,
+  mediaType: MediaType
+) {
+  const userId = await authenticateUser();
 
-  await db.delete(watchlist).where(eq(watchlist.id, watchlistId));
+  // Check if item exists in watchlist
+  if (!(await isInWatchlist(mediaId, mediaType))) {
+    return;
+  }
+
+  await db
+    .delete(watchlistItem)
+    .where(
+      and(
+        eq(watchlistItem.watchlistUserId, userId),
+        eq(watchlistItem.mediaId, mediaId),
+        eq(watchlistItem.mediaType, mediaType)
+      )
+    );
 }

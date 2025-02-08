@@ -1,13 +1,29 @@
 'use server';
 
 import db from '@/db';
-import { watchlist } from '@/db/schema';
+import { isInWatchlist } from '@/db/queries';
+import { watchlist, watchlistItem } from '@/db/schema';
 import { authenticateUser } from '@/lib/auth';
+import type { MediaType } from '@/types';
 
-export async function addToWatchlist(formData: FormData) {
+export async function addToWatchlist(mediaId: number, mediaType: MediaType) {
   const userId = await authenticateUser();
 
-  const movieId = Number(formData.get('movieId') as string);
+  // Check if already in watchlist
+  if (await isInWatchlist(mediaId, mediaType)) {
+    return;
+  }
 
-  await db.insert(watchlist).values({ movieId, userId });
+  // Ensure watchlist exists for user
+  await db
+    .insert(watchlist)
+    .values({ userId })
+    .onConflictDoNothing({ target: [watchlist.userId] });
+
+  // Add to watchlist
+  await db.insert(watchlistItem).values({
+    watchlistUserId: userId,
+    mediaId,
+    mediaType,
+  });
 }

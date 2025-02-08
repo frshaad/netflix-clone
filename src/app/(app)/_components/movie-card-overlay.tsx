@@ -1,7 +1,5 @@
 import { Heart, HeartOff, PlayCircle } from 'lucide-react';
 
-import { addToWatchlist } from '@/actions/add-to-watchlist.action';
-import { removeFromWatchlist } from '@/actions/remove-from-watchlist.action';
 import { Button } from '@/components/ui/button';
 import { isInWatchlist } from '@/db/queries';
 import { formatDuration } from '@/lib/utils';
@@ -18,13 +16,13 @@ export default async function MovieCardOverlay({
 
   const isMediaInWatchlist = await isInWatchlist(id, mediaType);
 
-  const handleAddToWatchlist = async () => {
-    await addToWatchlist(id, mediaType);
-  };
+  // const handleAddToWatchlist = async () => {
+  //   await addToWatchlist(id, mediaType);
+  // };
 
-  const handleRemoveFromWatchlist = async () => {
-    await removeFromWatchlist(id, mediaType);
-  };
+  // const handleRemoveFromWatchlist = async () => {
+  //   await removeFromWatchlist(id, mediaType);
+  // };
 
   return (
     <>
@@ -42,7 +40,7 @@ export default async function MovieCardOverlay({
             size="icon"
             type="submit"
             variant="outline"
-            onClick={handleRemoveFromWatchlist}
+            // onClick={handleRemoveFromWatchlist}
           >
             <HeartOff className="size-4 text-red-500" />
           </Button>
@@ -51,7 +49,7 @@ export default async function MovieCardOverlay({
             size="icon"
             type="submit"
             variant="outline"
-            onClick={handleAddToWatchlist}
+            // onClick={handleAddToWatchlist}
           >
             <Heart className="size-4 text-red-500" />
           </Button>

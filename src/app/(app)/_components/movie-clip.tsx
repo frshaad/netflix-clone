@@ -1,11 +1,11 @@
-import { findMovie } from '@/db/queries';
+import { searchMedia } from '@/db/queries';
 
 import MovieButtons from './movie-buttons';
 
 export default async function MovieClip() {
-  const movieData = await findMovie('');
+  const { movies, shows } = await searchMedia('');
 
-  if (!movieData) {
+  if (!movies || !shows) {
     return <h2>Loading...</h2>;
   }
 
@@ -19,7 +19,7 @@ export default async function MovieClip() {
     id,
     releaseYear,
     youtubeUrl,
-  } = movieData;
+  } = movies[0];
 
   return (
     <section className="flex h-[55vh] w-full items-center justify-start lg:h-[60vh]">

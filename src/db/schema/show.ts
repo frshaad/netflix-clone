@@ -35,5 +35,5 @@ export const show = pgTable('show', {
 });
 
 export const showRelations = relations(show, ({ many }) => ({
-  watchlistItems: many(watchlistItem, { relationName: 'showWatchlistItems' }),
+  watchlistItems: many(watchlistItem),
 }));

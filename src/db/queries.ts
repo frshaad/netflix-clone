@@ -1,8 +1,9 @@
 import { asc, desc, eq, like } from 'drizzle-orm';
 
 import db from '@/db';
-import { movie, show, watchlist } from '@/db/schema';
+import { movie, show, watchlistItem } from '@/db/schema';
 import { authenticateUser } from '@/lib/auth';
+import type { MediaItem } from '@/types';
 
 type MediaType = 'movie' | 'show' | 'all';
 type SortField = 'title' | 'releaseYear' | 'createdAt';
@@ -55,22 +56,26 @@ export async function getMediaList({
   };
 }
 
-export async function getUserWatchlist() {
+export async function getUserWatchlist(): Promise<MediaItem[]> {
   const userId = await authenticateUser();
 
-  const userWatchlist = await db.query.watchlist.findMany({
-    where: eq(watchlist.userId, userId),
+  const watchlistItems = await db.query.watchlistItem.findMany({
+    where: eq(watchlistItem.watchlistUserId, userId),
     with: {
-      items: {
-        with: {
-          movie: true,
-          show: true,
-        },
-      },
+      movie: true,
+      show: true,
     },
   });
 
-  return userWatchlist;
+  // Transform the results to include only the relevant media data based on mediaType
+  const transformedItems = watchlistItems.map((item) => ({
+    id: item.id,
+    mediaType: item.mediaType,
+    createdAt: item.createdAt,
+    media: item.mediaType === 'movie' ? item.movie : item.show,
+  }));
+
+  return transformedItems;
 }
 
 export async function searchMedia(query: string) {

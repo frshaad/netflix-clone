@@ -3,6 +3,7 @@ import js from '@eslint/js';
 import configPrettier from 'eslint-config-prettier';
 import drizzle from 'eslint-plugin-drizzle';
 import n from 'eslint-plugin-n';
+import tailwind from 'eslint-plugin-tailwindcss';
 import unicorn from 'eslint-plugin-unicorn';
 
 const MAX_JSX_DEPTH = 4;
@@ -133,6 +134,8 @@ const eslintConfig = [
       'drizzle/enforce-update-with-where': 'error',
     },
   },
+  // Tailwind
+  ...tailwind.configs['flat/recommended'],
   // Prettier
   configPrettier,
 ];

@@ -8,3 +8,15 @@ export type MediaItem = {
   createdAt: Date;
   media: typeof movie.$inferSelect | typeof show.$inferSelect;
 };
+
+export function isMovie(
+  media: typeof movie.$inferSelect | typeof show.$inferSelect
+): media is typeof movie.$inferSelect {
+  return 'duration' in media;
+}
+
+export function isShow(
+  media: typeof movie.$inferSelect | typeof show.$inferSelect
+): media is typeof show.$inferSelect {
+  return 'seasons' in media;
+}

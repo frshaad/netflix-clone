@@ -3,12 +3,17 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { MediaItem } from '@/types';
 
+import MovieCardOverlay from './movie-card-overlay';
+
 type Properties = MediaItem & {
   isLarge?: boolean;
 };
 
-export default function MovieCard({ isLarge, media }: Properties) {
-  const { title, imageUrl } = media;
+export default function MovieCard(properties: Properties) {
+  const {
+    media: { title, imageUrl },
+    isLarge,
+  } = properties;
 
   return (
     <div className={cn('relative cursor-pointer', isLarge ? 'h-60' : 'h-48')}>
@@ -31,7 +36,7 @@ export default function MovieCard({ isLarge, media }: Properties) {
             width={800}
           />
 
-          {/* <MovieCardOverlay movie={media} /> */}
+          <MovieCardOverlay {...properties} />
         </div>
       </div>
     </div>

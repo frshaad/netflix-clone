@@ -1,68 +1,60 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-
 import { Heart, HeartOff, PlayCircle } from 'lucide-react';
 
+import { addToWatchlist } from '@/actions/add-to-watchlist.action';
+import { removeFromWatchlist } from '@/actions/remove-from-watchlist.action';
 import { Button } from '@/components/ui/button';
-import type { movie, watchlist } from '@/db/schema';
+import { isInWatchlist } from '@/db/queries';
+import { formatDuration } from '@/lib/utils';
+import { type MediaItem, isMovie, isShow } from '@/types';
 
-import { addToWatchlist } from '../../../actions/add-to-watchlist.action';
-import { removeFromWatchlist } from '../../../actions/remove-from-watchlist.action';
-import VideoPlayerModal from './video-player-modal';
+export default async function MovieCardOverlay({
+  media,
+  mediaType,
+}: MediaItem) {
+  const { title, releaseYear, overview, ageRating, id } = media;
 
-type Properties = {
-  movie: typeof movie.$inferSelect & {
-    watchlistItems: (typeof watchlist.$inferSelect)[];
+  const duration = isMovie(media) ? media.duration : undefined;
+  const seasons = isShow(media) ? media.seasons : undefined;
+
+  const isMediaInWatchlist = await isInWatchlist(id, mediaType);
+
+  const handleAddToWatchlist = async () => {
+    await addToWatchlist(id, mediaType);
   };
-};
 
-export default function MovieCardOverlay({ movie }: Properties) {
-  const [isPlayerOpen, setIsPlayerOpen] = useState(false);
-  const pathname = usePathname();
-
-  const {
-    ageRating,
-    duration,
-    id,
-    overview,
-    releaseYear,
-    title,
-    watchlistItems,
-    youtubeUrl,
-  } = movie;
-
-  const isWatchlist = watchlistItems.length > 0;
-  const watchlistId = watchlistItems[0]?.id;
+  const handleRemoveFromWatchlist = async () => {
+    await removeFromWatchlist(id, mediaType);
+  };
 
   return (
     <>
       <button
         className="-mt-14"
         type="button"
-        onClick={() => setIsPlayerOpen(true)}
+        // onClick={() => setIsPlayerOpen(true)}
       >
         <PlayCircle className="size-20" />
       </button>
 
       <div className="absolute right-5 top-5 z-10">
-        {isWatchlist ? (
-          <form action={removeFromWatchlist}>
-            <input name="watchlistId" type="hidden" value={watchlistId} />
-            <input name="pathname" type="hidden" value={pathname} />
-            <Button size="icon" type="submit" variant="outline">
-              <HeartOff className="size-4 text-red-500" />
-            </Button>
-          </form>
+        {isMediaInWatchlist ? (
+          <Button
+            size="icon"
+            type="submit"
+            variant="outline"
+            onClick={handleRemoveFromWatchlist}
+          >
+            <HeartOff className="size-4 text-red-500" />
+          </Button>
         ) : (
-          <form action={addToWatchlist}>
-            <input name="movieId" type="hidden" value={id} />
-            <input name="pathname" type="hidden" value={pathname} />
-            <Button size="icon" type="submit" variant="outline">
-              <Heart className="size-4 text-red-500" />
-            </Button>
-          </form>
+          <Button
+            size="icon"
+            type="submit"
+            variant="outline"
+            onClick={handleAddToWatchlist}
+          >
+            <Heart className="size-4 text-red-500" />
+          </Button>
         )}
       </div>
 
@@ -73,14 +65,18 @@ export default function MovieCardOverlay({ movie }: Properties) {
           <p className="rounded border border-gray-200 px-1 py-0.5 text-sm font-normal">
             {ageRating}+
           </p>
-          <p className="text-sm font-normal">{duration}h</p>
+          <p className="text-sm font-normal">
+            {mediaType === 'movie'
+              ? duration && formatDuration(duration)
+              : seasons && `${seasons} Season${seasons > 1 ? 's' : ''}`}
+          </p>
         </div>
         <p className="line-clamp-1 text-sm font-light text-gray-200">
           {overview}
         </p>
       </div>
 
-      <VideoPlayerModal
+      {/* <VideoPlayerModal
         age={ageRating}
         changeState={setIsPlayerOpen}
         duration={duration}
@@ -90,7 +86,7 @@ export default function MovieCardOverlay({ movie }: Properties) {
         state={isPlayerOpen}
         title={title}
         youtubeUrl={youtubeUrl}
-      />
+      /> */}
     </>
   );
 }

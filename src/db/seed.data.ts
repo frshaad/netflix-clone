@@ -157,7 +157,7 @@ export const showData: (typeof show.$inferInsert)[] = [
     overview:
       "Follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the twentieth century.",
     imageUrl:
-      'https://image.tmdb.org/t/p/original/7k3OEd6G7dqArJbY01dissolved.jpg',
+      'https://image.tmdb.org/t/p/original/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg',
     videoUrl: 'https://examples.com/the-crown.mp4',
     youtubeUrl: 'https://www.youtube.com/watch?v=JWtnJjn6ng0',
     ageRating: 15,
@@ -185,7 +185,7 @@ export const showData: (typeof show.$inferInsert)[] = [
     overview:
       'The Baltimore drug scene, seen through the eyes of drug dealers and law enforcement.',
     imageUrl:
-      'https://image.tmdb.org/t/p/original/4lbclFySvugI51fwsyxBXfo1CMf.jpg',
+      'https://image.tmdb.org/t/p/original/4lbclFySvugI51fwsyxBTOm4DqK.jpg',
     videoUrl: 'https://examples.com/the-wire.mp4',
     youtubeUrl: 'https://www.youtube.com/watch?v=uDcQbk78CSw',
     ageRating: 18,
@@ -227,7 +227,7 @@ export const showData: (typeof show.$inferInsert)[] = [
     overview:
       'Various chronicles of deception, intrigue and murder in and around frozen Minnesota.',
     imageUrl:
-      'https://image.tmdb.org/t/p/original/3IkPwje9zK4nL4UxubD7RBJ3era.jpg',
+      'https://image.tmdb.org/t/p/original/6U9CPeD8obHzweikFhiLhpc7YBT.jpg',
     videoUrl: 'https://examples.com/fargo.mp4',
     youtubeUrl: 'https://www.youtube.com/watch?v=gZpYeFLmYJw',
     ageRating: 18,

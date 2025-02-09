@@ -3,32 +3,26 @@ import Image from 'next/image';
 import { Dot } from 'lucide-react';
 
 import { isInWatchlist } from '@/db/queries';
-import { cn, formatDuration } from '@/lib/utils';
+import { formatDuration } from '@/lib/utils';
 import { type MediaItem, isMovie, isShow } from '@/types';
 
 import MovieCardOverlay from './movie-card-overlay';
 
-type Properties = MediaItem & {
-  isLarge?: boolean;
-};
-
-export default async function MovieCard(properties: Properties) {
-  const { media, isLarge, mediaType } = properties;
+export default async function MovieCard({ media, mediaType }: MediaItem) {
   const { title, imageUrl, releaseYear, ageRating, id } = media;
-  const duration = isMovie(media) ? media.duration : undefined;
-  const seasons = isShow(media) ? media.seasons : undefined;
   const isMediaInWatchlist = await isInWatchlist(id, mediaType);
 
+  const duration = isMovie(media) ? media.duration : undefined;
+  const seasons = isShow(media) ? media.seasons : undefined;
+
   return (
-    <article
-      className={cn('relative cursor-pointer group', isLarge ? 'h-60' : 'h-48')}
-    >
+    <article className="group relative h-96 max-w-72 cursor-pointer">
       <Image
         alt={`${title}`}
         className="absolute size-full rounded-sm object-cover"
-        height={400}
+        height={500}
         src={imageUrl}
-        width={500}
+        width={300}
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />

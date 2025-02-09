@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <header className="mx-auto flex w-full max-w-7xl items-center justify-between p-5 sm:px-6 lg:px-8">
       <nav className="flex items-center">
-        <Link className="w-32" href="/home">
+        <Link className="w-32" href="/">
           <Image alt="Netflix logo" src={Logo} priority />
         </Link>
         <ul className="ml-14 hidden gap-x-4 md:flex">

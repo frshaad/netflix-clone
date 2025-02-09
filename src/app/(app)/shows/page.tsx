@@ -16,7 +16,7 @@ export default async function RecentMediaPage() {
               id={item.id}
               key={item.id}
               media={item}
-              mediaType="movie"
+              mediaType="show"
             />
           ))}
         </div>

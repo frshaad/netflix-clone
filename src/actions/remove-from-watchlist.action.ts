@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { and, eq } from 'drizzle-orm';
 
 import db from '@/db';
@@ -27,4 +29,9 @@ export async function removeFromWatchlist(formData: FormData) {
         eq(watchlistItem.mediaType, mediaType)
       )
     );
+
+  revalidatePath('/');
+  revalidatePath('/shows');
+  revalidatePath('/movies');
+  revalidatePath('/watchlist');
 }

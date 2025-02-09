@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import db from '@/db';
 import { isInWatchlist } from '@/db/queries';
 import { watchlist, watchlistItem } from '@/db/schema';
@@ -28,4 +30,9 @@ export async function addToWatchlist(formData: FormData) {
     mediaId,
     mediaType,
   });
+
+  revalidatePath('/');
+  revalidatePath('/shows');
+  revalidatePath('/movies');
+  revalidatePath('/watchlist');
 }

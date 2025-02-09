@@ -36,6 +36,13 @@
       "when": 1739043166404,
       "tag": "0004_abandoned_thing",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1739119858270,
+      "tag": "0005_military_pete_wisdom",
+      "breakpoints": true
     }
   ]
 }

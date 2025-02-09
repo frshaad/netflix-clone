@@ -50,11 +50,7 @@ export default async function MovieCard(properties: Properties) {
 
       <div className="absolute inset-0 z-10 opacity-0 transition duration-300 group-hover:opacity-100">
         <div className="flex size-full items-center justify-center  bg-gradient-to-b from-transparent via-black/40 to-black">
-          <MovieCardOverlay
-            isMediaInWatchlist={isMediaInWatchlist}
-            mediaId={id}
-            mediaType={mediaType}
-          />
+          <MovieCardOverlay isMediaInWatchlist={isMediaInWatchlist} />
         </div>
       </div>
     </article>

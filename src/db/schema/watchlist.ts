@@ -22,7 +22,7 @@ export const watchlistItem = pgTable('watchlist_item', {
   id: serial().primaryKey(),
   watchlistUserId: varchar({ length: 255 })
     .notNull()
-    .references(() => watchlist.userId),
+    .references(() => watchlist.userId, { onDelete: 'cascade' }),
   mediaId: integer().notNull(),
   mediaType: mediaTypeEnum().notNull(),
   createdAt: timestamp().defaultNow().notNull(),

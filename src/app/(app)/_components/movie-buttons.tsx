@@ -5,28 +5,11 @@ import { useState } from 'react';
 import { InfoIcon, PlayCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import type { MediaItem } from '@/types';
 
 import VideoPlayerModal from './video-player-modal';
 
-type Properties = {
-  overview: string;
-  youtubeUrl: string;
-  id: number;
-  age: number;
-  title: string;
-  releaseDate: number;
-  duration: number;
-};
-
-export default function MovieButtons({
-  age,
-  duration,
-  id,
-  overview,
-  releaseDate,
-  title,
-  youtubeUrl,
-}: Properties) {
+export default function MovieButtons(properties: MediaItem) {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
 
   return (
@@ -46,15 +29,9 @@ export default function MovieButtons({
       </Button>
 
       <VideoPlayerModal
-        age={age}
         changeState={setIsPlayerOpen}
-        duration={duration}
-        key={id}
-        overview={overview}
-        release={releaseDate}
         state={isPlayerOpen}
-        title={title}
-        youtubeUrl={youtubeUrl}
+        {...properties}
       />
     </>
   );

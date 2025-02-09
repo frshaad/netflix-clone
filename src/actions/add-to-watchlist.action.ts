@@ -6,8 +6,10 @@ import { watchlist, watchlistItem } from '@/db/schema';
 import { authenticateUser } from '@/lib/auth';
 import type { MediaType } from '@/types';
 
-export async function addToWatchlist(mediaId: number, mediaType: MediaType) {
+export async function addToWatchlist(formData: FormData) {
   const userId = await authenticateUser();
+  const mediaId = Number(formData.get('mediaId'));
+  const mediaType = formData.get('mediaType') as MediaType;
 
   // Check if already in watchlist
   if (await isInWatchlist(mediaId, mediaType)) {

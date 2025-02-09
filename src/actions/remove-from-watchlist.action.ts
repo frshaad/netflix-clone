@@ -8,11 +8,10 @@ import { watchlistItem } from '@/db/schema';
 import { authenticateUser } from '@/lib/auth';
 import type { MediaType } from '@/types';
 
-export async function removeFromWatchlist(
-  mediaId: number,
-  mediaType: MediaType
-) {
+export async function removeFromWatchlist(formData: FormData) {
   const userId = await authenticateUser();
+  const mediaId = Number(formData.get('mediaId'));
+  const mediaType = formData.get('mediaType') as MediaType;
 
   // Check if item exists in watchlist
   if (!(await isInWatchlist(mediaId, mediaType))) {

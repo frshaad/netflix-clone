@@ -1,7 +1,10 @@
 import Image from 'next/image';
 
-import { cn } from '@/lib/utils';
-import type { MediaItem } from '@/types';
+import { Dot } from 'lucide-react';
+
+import { isInWatchlist } from '@/db/queries';
+import { cn, formatDuration } from '@/lib/utils';
+import { type MediaItem, isMovie, isShow } from '@/types';
 
 import MovieCardOverlay from './movie-card-overlay';
 
@@ -9,17 +12,17 @@ type Properties = MediaItem & {
   isLarge?: boolean;
 };
 
-export default function MovieCard(properties: Properties) {
-  const {
-    media: { title, imageUrl },
-    isLarge,
-  } = properties;
+export default async function MovieCard(properties: Properties) {
+  const { media, isLarge, mediaType } = properties;
+  const { title, imageUrl, releaseYear, ageRating, id } = media;
+  const duration = isMovie(media) ? media.duration : undefined;
+  const seasons = isShow(media) ? media.seasons : undefined;
+  const isMediaInWatchlist = await isInWatchlist(id, mediaType);
 
   return (
     <article
-      className={cn('relative cursor-pointer', isLarge ? 'h-60' : 'h-48')}
+      className={cn('relative cursor-pointer group', isLarge ? 'h-60' : 'h-48')}
     >
-      <p>{title}</p>
       <Image
         alt={`${title}`}
         className="absolute size-full rounded-sm object-cover"
@@ -28,17 +31,26 @@ export default function MovieCard(properties: Properties) {
         width={500}
       />
 
-      <div className="relative z-10 h-60 w-full opacity-0 transition duration-300 hover:scale-[1.03] hover:opacity-100">
-        <div className="z-10 flex size-full items-center justify-center rounded-lg border bg-gradient-to-b from-transparent via-black/50 to-black">
-          <Image
-            alt={`${title}`}
-            className="absolute -z-10 size-full rounded-lg object-cover"
-            height={800}
-            src={imageUrl}
-            width={800}
-          />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-          <MovieCardOverlay {...properties} />
+      <div className="absolute -bottom-3 left-0 space-y-1 p-5">
+        <h1 className="line-clamp-1 text-xl font-bold">{title}</h1>
+        <div className="flex items-center text-gray-300">
+          <p className="text-sm font-normal">{releaseYear}</p>
+          <Dot className="opacity-50" size={16} />
+          <p className="text-sm font-normal">{ageRating}+</p>
+          <Dot className="opacity-50" size={16} />
+          <p className="text-sm font-normal">
+            {mediaType === 'movie'
+              ? duration && formatDuration(duration)
+              : seasons && `${seasons} Season${seasons > 1 ? 's' : ''}`}
+          </p>
+        </div>
+      </div>
+
+      <div className="absolute inset-0 z-10 opacity-0 transition duration-300 group-hover:opacity-100">
+        <div className="flex size-full items-center justify-center  bg-gradient-to-b from-transparent via-black/40 to-black">
+          <MovieCardOverlay isMediaInWatchlist={isMediaInWatchlist} />
         </div>
       </div>
     </article>

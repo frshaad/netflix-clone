@@ -3,10 +3,10 @@ import { getMediaList } from '@/db/queries';
 import MovieCard from '../_components/movie-card';
 
 export default async function RecentMediaPage() {
-  const { movies, shows } = await getMediaList({ limit: 10 });
+  const { movies, shows } = await getMediaList({ limit: 3 });
 
   return (
-    <div className="space-y-44">
+    <div className="mt-10 space-y-44">
       <section className="space-y-10">
         <h2 className="text-4xl font-bold">New Movies</h2>
         <div className="grid grid-cols-3 gap-14">

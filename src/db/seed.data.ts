@@ -6,7 +6,7 @@ export const movieData: (typeof movie.$inferInsert)[] = [
     overview:
       'A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
     imageUrl:
-      'https://image.tmdb.org/t/p/original/8bxHvsNvZdX5R2tROR6YnUPO0Xp.jpg',
+      'https://image.tmdb.org/t/p/original/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg',
     videoUrl: 'https://examples.com/inception.mp4',
     youtubeUrl: 'https://www.youtube.com/watch?v=YoHD9XEInc0',
     ageRating: 12,

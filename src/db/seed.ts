@@ -6,7 +6,12 @@ import * as schema from '@/db/schema';
 
 import { movieData, showData } from './seed.data';
 
-export const TABLES_TO_CLEAR = [schema.movie, schema.watchlist];
+export const TABLES_TO_CLEAR = [
+  schema.movie,
+  schema.show,
+  schema.watchlist,
+  schema.watchlistItem,
+];
 
 async function clearTable(table: any) {
   try {
